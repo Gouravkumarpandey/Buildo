@@ -4,10 +4,29 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
-:root {
+/* ─── Dark theme (default) ──────────────────────────────── */
+:root,
+.dark {
+  --bg-base: #020617;
+  --bg-surface: #0f172a;
+  --bg-card: rgba(255 255 255 / 0.04);
+  --border: rgba(255 255 255 / 0.08);
+  --text-base: #e2e8f0;
+  --text-muted: #64748b;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
 }
+
+/* ─── Light theme ───────────────────────────────────────── */
+:root:not(.dark) {
+  --bg-base: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(0 0 0 / 0.03);
+  --border: rgba(0 0 0 / 0.08);
+  --text-base: #0f172a;
+  --text-muted: #64748b;
+}
+
 
 * {
   box-sizing: border-box;
@@ -21,8 +40,8 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: #020617;
-  color: #e2e8f0;
+  background: var(--bg-base);
+  color: var(--text-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -106,4 +125,83 @@ table {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
+}
+
+/* ─── Light mode page overrides ─────────────────────────── */
+/* These override the hardcoded dark Tailwind classes when .dark is absent */
+html:not(.dark) main,
+html:not(.dark) nav,
+html:not(.dark) footer,
+html:not(.dark) section,
+html:not(.dark) aside {
+  --tw-bg-opacity: 1;
+}
+
+/* Map dark utility colors → light equivalents */
+html:not(.dark) .bg-black {
+  background-color: #f8fafc !important;
+}
+
+html:not(.dark) .bg-zinc-950 {
+  background-color: #f1f5f9 !important;
+}
+
+html:not(.dark) .bg-zinc-900 {
+  background-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .bg-zinc-800 {
+  background-color: #cbd5e1 !important;
+}
+
+html:not(.dark) .bg-black\/80 {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+
+/* Text colors in light mode */
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-zinc-300 {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-zinc-400 {
+  color: #475569 !important;
+}
+
+html:not(.dark) .text-zinc-500 {
+  color: #64748b !important;
+}
+
+html:not(.dark) .text-zinc-600 {
+  color: #475569 !important;
+}
+
+/* Border colors in light mode */
+html:not(.dark) .border-zinc-800 {
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) .border-zinc-700 {
+  border-color: #94a3b8 !important;
+}
+
+html:not(.dark) .border-white\/\[0\.06\] {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) .border-white\/\[0\.05\] {
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Navbar backdrop in light mode */
+html:not(.dark) nav.backdrop-blur-xl {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+/* Logo svg fill in light mode */
+html:not(.dark) svg[fill="white"] {
+  fill: #0f172a !important;
 }
