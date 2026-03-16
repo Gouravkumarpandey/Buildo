@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const stored = localStorage.getItem('autodeploy_token');
-        const storedUser = localStorage.getItem('autodeploy_user');
+        const stored = localStorage.getItem('nexora_token');
+        const storedUser = localStorage.getItem('nexora_user');
         if (stored && storedUser) {
             setToken(stored);
             setUser(JSON.parse(storedUser));
@@ -43,8 +43,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const { data } = await axios.post(`${API}/api/auth/login`, { email, password });
         setToken(data.token);
         setUser(data.user);
-        localStorage.setItem('autodeploy_token', data.token);
-        localStorage.setItem('autodeploy_user', JSON.stringify(data.user));
+        localStorage.setItem('nexora_token', data.token);
+        localStorage.setItem('nexora_user', JSON.stringify(data.user));
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
     }, []);
 
@@ -55,8 +55,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const logout = useCallback(() => {
         setUser(null);
         setToken(null);
-        localStorage.removeItem('autodeploy_token');
-        localStorage.removeItem('autodeploy_user');
+        localStorage.removeItem('nexora_token');
+        localStorage.removeItem('nexora_user');
         delete axios.defaults.headers.common['Authorization'];
     }, []);
 

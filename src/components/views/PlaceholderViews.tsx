@@ -81,7 +81,7 @@ export function IntegrationsView() {
         <div className="flex-1 p-6 overflow-y-auto">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-xl font-bold text-white mb-1">Integrations</h1>
-                <p className="text-sm text-zinc-500 mb-6">Connect your favorite tools to AutoDeploy</p>
+                <p className="text-sm text-zinc-500 mb-6">Connect your favorite tools to Nexora</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {integrations.map(i => (
                         <div key={i.name} className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-all">

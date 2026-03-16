@@ -8,9 +8,9 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AutoDeploy v1 – GitHub to Live CI/CD',
-  description: 'Deploy any GitHub repo with Docker in seconds. Full CI/CD pipeline with live logs, history & rollback.',
-  keywords: 'CI/CD, deployment, Docker, GitHub, DevOps, AutoDeploy',
+  title: 'Nexora – Intelligent CI/CD Deployment Engine',
+  description: 'Enterprise-grade CI/CD orchestration for intelligent container deployments with real-time monitoring and one-click rollbacks.',
+  keywords: 'CI/CD, deployment, Docker, GitHub, DevOps, Kubernetes, Nexora',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -15,7 +15,7 @@ const COMPANIES = ['Stripe', 'GitHub', 'Shopify', 'Linear', 'Figma', 'Notion', '
 /* ─── Terminal animation lines ── */
 const TERMINAL_LINES = [
     { text: '$ railway login', delay: 0, color: 'text-zinc-100' },
-    { text: '🎉  Logged in as gourav@autodeploy.app', delay: 600, color: 'text-emerald-400' },
+    { text: '🎉  Logged in as admin@nexora.app', delay: 600, color: 'text-emerald-400' },
     { text: '$ railway up', delay: 1200, color: 'text-zinc-100' },
     { text: '⬢  Detecting framework...', delay: 1800, color: 'text-violet-400' },
     { text: '✓  Next.js detected', delay: 2400, color: 'text-emerald-400' },
@@ -84,7 +84,7 @@ export default function LandingPage() {
                         <div className="w-7 h-7 bg-gradient-to-br from-violet-500 to-purple-700 rounded-lg flex items-center justify-center">
                             <Zap className="w-4 h-4 text-white" />
                         </div>
-                        <span className="font-black text-white text-lg tracking-tight">AutoDeploy</span>
+                        <span className="font-black text-white text-lg tracking-tight">Nexora</span>
                     </Link>
                     <div className="hidden md:flex items-center gap-1">
                         {['Product', 'Pricing', 'Docs', 'Blog', 'Changelog'].map(l => (
@@ -127,7 +127,7 @@ export default function LandingPage() {
                     </h1>
 
                     <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                        AutoDeploy is the fastest way to go from code to production.
+                        Nexora is the fastest way to go from code to production.
                         Connect your repo and ship — we handle the rest.
                     </p>
 
@@ -180,7 +180,7 @@ export default function LandingPage() {
                             <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 flex items-center justify-between">
                                 <div>
                                     <p className="text-xs text-zinc-500 mb-0.5">Live URL</p>
-                                    <p className="text-sm text-violet-400 font-mono">my-app.up.autodeploy.app</p>
+                                    <p className="text-sm text-violet-400 font-mono">my-app.up.nexora.app</p>
                                 </div>
                                 <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
                                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -257,7 +257,7 @@ export default function LandingPage() {
                         Ready to ship?
                     </h2>
                     <p className="text-zinc-500 mb-10 leading-relaxed">
-                        Join 50,000+ developers deploying faster with AutoDeploy. Start free, scale as you grow.
+                        Join 50,000+ developers deploying faster with Nexora. Start free, scale as you grow.
                     </p>
                     <div className="flex items-center justify-center gap-3 flex-wrap">
                         <Link href="/register" className="inline-flex items-center gap-2 bg-white text-black font-black px-8 py-4 rounded-xl hover:bg-zinc-100 transition-all text-sm shadow-2xl shadow-white/10">
@@ -278,7 +278,7 @@ export default function LandingPage() {
                         <div>
                             <div className="flex items-center gap-2 mb-3">
                                 <div className="w-6 h-6 bg-gradient-to-br from-violet-500 to-purple-700 rounded-md flex items-center justify-center"><Zap className="w-3.5 h-3.5 text-white" /></div>
-                                <span className="font-black text-white">AutoDeploy</span>
+                                <span className="font-black text-white">Nexora</span>
                             </div>
                             <p className="text-xs text-zinc-600 max-w-xs">The cloud platform built for developers who value speed, simplicity, and reliability.</p>
                         </div>
@@ -298,7 +298,7 @@ export default function LandingPage() {
                         </div>
                     </div>
                     <div className="mt-10 pt-6 border-t border-zinc-900 flex items-center justify-between">
-                        <p className="text-xs text-zinc-700">© 2025 AutoDeploy. All rights reserved.</p>
+                        <p className="text-xs text-zinc-700">© 2025 Nexora. All rights reserved.</p>
                         <p className="text-xs text-zinc-700">Made with ♥ for developers</p>
                     </div>
                 </div>
