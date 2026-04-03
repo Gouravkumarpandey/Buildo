@@ -8,9 +8,9 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Nexora – Intelligent CI/CD Deployment Engine',
+  title: 'Buildo – Intelligent CI/CD Deployment Engine',
   description: 'Enterprise-grade CI/CD orchestration for intelligent container deployments with real-time monitoring and one-click rollbacks.',
-  keywords: 'CI/CD, deployment, Docker, GitHub, DevOps, Kubernetes, Nexora',
+  keywords: 'CI/CD, deployment, Docker, GitHub, DevOps, Kubernetes, Buildo',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

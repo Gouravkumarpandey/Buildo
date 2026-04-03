@@ -46,7 +46,7 @@ function PlanStep({ onContinue }: { onContinue: (plan: 'pro' | 'hobby') => void 
                                         <div className="w-1.5 h-1.5 rounded-full bg-white" />
                                     )}
                                 </div>
-                                <span className="text-sm text-zinc-300">I'm working on commercial projects</span>
+                                <span className="text-sm text-zinc-300">I&apos;m working on commercial projects</span>
                             </div>
                             <span className="text-xs font-semibold bg-blue-600 text-white px-2 py-0.5 rounded-full">
                                 Pro
@@ -77,7 +77,7 @@ function PlanStep({ onContinue }: { onContinue: (plan: 'pro' | 'hobby') => void 
                                         <div className="w-1.5 h-1.5 rounded-full bg-white" />
                                     )}
                                 </div>
-                                <span className="text-sm text-zinc-300">I'm working on personal projects</span>
+                                <span className="text-sm text-zinc-300">I&apos;m working on personal projects</span>
                             </div>
                             <span className="text-xs font-semibold bg-zinc-700 text-zinc-300 px-2 py-0.5 rounded-full">
                                 Hobby

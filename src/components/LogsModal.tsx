@@ -57,7 +57,7 @@ export const LogsModal: React.FC<LogsModalProps> = ({ deploymentId, projectName,
 
             // Load existing logs
             try {
-                const token = localStorage.getItem('nexora_token');
+                const token = localStorage.getItem('buildo_token');
                 const res = await fetch(`${API}/api/deployments/${deploymentId}/logs`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });

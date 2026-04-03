@@ -69,7 +69,7 @@ export const LogConsole: React.FC<LogConsoleProps> = ({ deploymentId, projectNam
             window.addEventListener('resize', handleResize);
 
             term.writeln('\x1b[1;34m╔══════════════════════════════════════╗\x1b[0m');
-            term.writeln('\x1b[1;34m║   Nexora CI/CD Pipeline Console  ║\x1b[0m');
+            term.writeln('\x1b[1;34m║   Buildo CI/CD Pipeline Console   ║\x1b[0m');
             term.writeln('\x1b[1;34m╚══════════════════════════════════════╝\x1b[0m');
             term.writeln('');
 
@@ -138,7 +138,7 @@ export const LogConsole: React.FC<LogConsoleProps> = ({ deploymentId, projectNam
                         <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
                     </div>
                     <span className="text-xs font-mono text-slate-400">
-                        {projectName ? `nexora://${projectName.toLowerCase().replace(/\s+/g, '-')}` : 'nexora://idle'}
+                        {projectName ? `buildo://${projectName.toLowerCase().replace(/\s+/g, '-')}` : 'buildo://idle'}
                     </span>
                 </div>
                 <div className="flex items-center gap-2">

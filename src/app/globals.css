@@ -2,31 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rubik:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ─── Dark theme (default) ──────────────────────────────── */
-:root,
-.dark {
-  --bg-base: #020617;
-  --bg-surface: #0f172a;
-  --bg-card: rgba(255 255 255 / 0.04);
-  --border: rgba(255 255 255 / 0.08);
-  --text-base: #e2e8f0;
-  --text-muted: #64748b;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+/* ─── Neobrutalist Theme ─────────────────────────────────── */
+:root {
+  --neo-blue: #0066FF;
+  --neo-pink: #FF1493;
+  --neo-orange: #FF6B35;
+  --neo-green: #00D084;
+  --neo-yellow: #FFD700;
+  --neo-purple: #A020F0;
+  --neo-red: #FF0000;
+  --neo-white: #FFFFFF;
+  --neo-gray: #F5F5F5;
+  --neo-dark: #000000;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --text-primary: #000000;
+  --text-secondary: #2A2A2A;
+  --border-color: #000000;
+  --font-sans: 'Inter', 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --font-display: 'Rubik', sans-serif;
 }
 
-/* ─── Light theme ───────────────────────────────────────── */
-:root:not(.dark) {
-  --bg-base: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-card: rgba(0 0 0 / 0.03);
-  --border: rgba(0 0 0 / 0.08);
-  --text-base: #0f172a;
-  --text-muted: #64748b;
+.dark {
+  --neo-white: #000000;
+  --neo-gray: #1A1A1A;
+  --neo-dark: #FFFFFF;
+  --bg-primary: #000000;
+  --bg-secondary: #1A1A1A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  --border-color: #FFFFFF;
 }
-
 
 * {
   box-sizing: border-box;
@@ -40,41 +49,278 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--bg-base);
-  color: var(--text-base);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  border-top: 5px solid var(--neo-blue);
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.3);
-  border-radius: 100px;
+  background: var(--neo-blue);
+  border-radius: 0;
+  border: 2px solid var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.6);
+  background: var(--neo-pink);
+}
+
+/* ─── Typography ──────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 6vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+p {
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Neobrutalist Components ──────────────────────────── */
+
+.neo-button {
+  @apply px-6 py-3 font-bold border-3 border-current rounded-none transition-all duration-200 active:translate-x-1 active:translate-y-1 cursor-pointer;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.neo-button-primary {
+  @apply neo-button bg-blue-600 text-white border-black shadow-neo-lg hover:shadow-neo-xl;
+}
+
+.neo-button-secondary {
+  @apply neo-button bg-white text-black border-black shadow-neo-lg hover:shadow-neo-xl;
+}
+
+.neo-button-pink {
+  @apply neo-button bg-pink-600 text-white border-black shadow-neo-lg hover:shadow-neo-xl;
+}
+
+.neo-button-green {
+  @apply neo-button bg-green-600 text-white border-black shadow-neo-lg hover:shadow-neo-xl;
+}
+
+.neo-card {
+  @apply border-4 border-black rounded-neo bg-white p-6 shadow-neo hover:shadow-neo-lg transition-all duration-200;
+}
+
+.dark .neo-card {
+  @apply border-4 border-white bg-black text-white;
+}
+
+.neo-input {
+  @apply w-full px-4 py-3 border-4 border-black rounded-neo font-semibold text-base bg-white text-black placeholder-gray-400 transition-all duration-200 focus:outline-none focus:shadow-neo-lg;
+}
+
+.dark .neo-input {
+  @apply border-4 border-white bg-white text-black;
+}
+
+.neo-input:focus {
+  @apply shadow-neo-lg;
+}
+
+.neo-badge {
+  @apply inline-block px-4 py-2 border-3 border-black rounded-neo font-bold text-sm uppercase tracking-wide;
+}
+
+.neo-tag {
+  @apply inline-block px-3 py-1 border-2 border-current rounded-neo font-semibold text-xs uppercase;
+}
+
+/* ─── Grid System ──────────────────────────────────────── */
+.neo-section {
+  @apply py-16 px-4 md:px-8 lg:px-16;
+}
+
+.neo-container {
+  @apply max-w-7xl mx-auto;
 }
 
 /* ─── Animations ────────────────────────────────────────── */
-@keyframes fadeInUp {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* ─── Utility Classes ──────────────────────────────────── */
+.text-neo-heading {
+  @apply font-display font-900 tracking-tighter;
+}
+
+.text-neo-bold {
+  @apply font-display font-800 tracking-tight;
+}
+
+.text-neo-semibold {
+  @apply font-display font-700;
+}
+
+.border-neo-thick {
+  @apply border-4 border-black;
+}
+
+.dark .border-neo-thick {
+  @apply border-4 border-white;
+}
+
+.shadow-neo-thick {
+  @apply shadow-neo-xl;
+}
+
+.transition-neo {
+  @apply transition-all duration-200 cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .neo-button {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .neo-card {
+    @apply p-4;
+  }
+}
+
+/* ─── Print Styles ────────────────────────────────────── */
+@media print {
+  body {
+    border-top: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
   }
 }
 
@@ -98,6 +344,59 @@ body {
   50% {
     box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
   }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ─── Animation Utilities ────────────────────────────────── */
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out both;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out both;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out both;
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
 }
 
 .fade-in-up {

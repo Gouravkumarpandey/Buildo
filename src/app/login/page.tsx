@@ -154,7 +154,7 @@ export default function LoginPage() {
             <div className="flex-1 flex items-center justify-center px-4">
                 <div className="w-full max-w-[380px] space-y-4">
                     <h1 className="text-2xl font-bold text-white text-center mb-6">
-                        Log in to Nexora
+                        Log in to Buildo
                     </h1>
 
                     {/* Email step */}
