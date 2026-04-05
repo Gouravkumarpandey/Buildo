@@ -170,7 +170,7 @@ export default function LandingPage() {
 
                 {/* ─── HERO ─── */}
                 <Box sx={{ 
-                    pt: 20, 
+                    pt: 15, 
                     pb: 12, 
                     bgcolor: '#F5F5DC',
                     position: 'relative',
@@ -179,11 +179,56 @@ export default function LandingPage() {
                 }}>
                     <GridPattern />
                     
+                    {/* Decorative Top-Left Lime Square */}
+                    <Box sx={{ 
+                        position: 'absolute', 
+                        top: { xs: 30, md: 60 },
+                        left: { xs: 10, md: 40 },
+                        width: { xs: 60, md: 100 },
+                        height: { xs: 60, md: 100 },
+                        bgcolor: '#CCFF00', 
+                        border: '3px solid #000000',
+                        transform: 'rotate(-20deg)',
+                        opacity: 0.85,
+                        boxShadow: '6px 6px 0px rgba(0,0,0,0.3)',
+                        zIndex: 0
+                    }} />
+                    
+                    {/* Decorative Top-Right Cyan Square */}
+                    <Box sx={{ 
+                        position: 'absolute', 
+                        top: { xs: 80, md: 120 },
+                        right: { xs: 10, md: 60 },
+                        width: { xs: 70, md: 110 },
+                        height: { xs: 70, md: 110 },
+                        bgcolor: '#00D9FF', 
+                        border: '3px solid #000000',
+                        transform: 'rotate(25deg)',
+                        opacity: 0.9,
+                        boxShadow: '6px 6px 0px rgba(0,0,0,0.3)',
+                        zIndex: 0
+                    }} />
+                    
+                    {/* Decorative Bottom-Right Pink Square */}
+                    <Box sx={{ 
+                        position: 'absolute', 
+                        bottom: { xs: 40, md: 80 },
+                        right: { xs: 20, md: 80 },
+                        width: { xs: 80, md: 120 },
+                        height: { xs: 80, md: 120 },
+                        bgcolor: '#FF006E', 
+                        border: '3px solid #000000',
+                        transform: 'rotate(-25deg)',
+                        opacity: 0.85,
+                        boxShadow: '6px 6px 0px rgba(0,0,0,0.3)',
+                        zIndex: 0
+                    }} />
+                    
                     <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
                         {/* Tagline Box */}
                         <Box sx={{ 
                             display: 'inline-block',
-                            border: '3px solid #000000',
+                            border: '3px solid #FF006E',
                             px: 4,
                             py: 1.5,
                             mb: 6,
@@ -197,7 +242,7 @@ export default function LandingPage() {
 
                         {/* Main Headline */}
                         <Typography sx={{ 
-                            fontSize: '5rem', 
+                            fontSize: '6.5rem', 
                             fontWeight: 900,
                             color: '#000000',
                             mb: 2,
@@ -210,15 +255,16 @@ export default function LandingPage() {
                         {/* Sub Headline */}
                         <Box sx={{ mb: 6 }}>
                             <Typography sx={{ 
-                                fontSize: '3rem', 
+                                fontSize: '4.2rem', 
                                 fontWeight: 900,
+                                color: '#7209B7',
                                 mb: 1,
                                 letterSpacing: '-0.05em'
                             }}>
                                 THE SMART
                             </Typography>
                             <Typography sx={{ 
-                                fontSize: '3rem', 
+                                fontSize: '4.2rem', 
                                 fontWeight: 900,
                                 color: '#7209B7',
                                 letterSpacing: '-0.05em'
@@ -577,17 +623,17 @@ export default function LandingPage() {
 
                 {/* ─── FOOTER ─── */}
                 <Box sx={{ 
-                    py: { xs: 8, md: 12 }, 
+                    py: { xs: 4, md: 6 }, 
                     bgcolor: '#000000',
                     color: '#FFFFFF',
                     borderTop: { xs: '2px solid #CCFF00', md: '4px solid #CCFF00' },
                     px: { xs: 2, sm: 3 }
                 }}>
                     <Container maxWidth="lg">
-                        <Grid container spacing={{ xs: 6, md: 8 }} sx={{ mb: 8 }}>
+                        <Grid container spacing={{ xs: 3, md: 4 }} sx={{ mb: 4 }}>
                             {/* Left Section - Logo & Description */}
                             <Grid item xs={12} md={3}>
-                                <Box sx={{ mb: 4 }}>
+                                <Box sx={{ mb: 2 }}>
                                     <Box sx={{ 
                                         bgcolor: '#CCFF00', 
                                         border: { xs: '2px solid #000000', md: '3px solid #000000' },
@@ -598,7 +644,7 @@ export default function LandingPage() {
                                         gap: 1,
                                         fontWeight: 900,
                                         color: '#000000',
-                                        mb: 3
+                                        mb: 2
                                     }}>
                                         <Zap size={18} color="#000000" />
                                         BUILDO
@@ -607,7 +653,7 @@ export default function LandingPage() {
                                 <Typography sx={{ 
                                     fontWeight: 600, 
                                     color: '#CCCCCC', 
-                                    mb: 4, 
+                                    mb: 2, 
                                     fontSize: { xs: '0.9rem', md: '0.95rem' },
                                     lineHeight: 1.6
                                 }}>
@@ -615,7 +661,7 @@ export default function LandingPage() {
                                 </Typography>
                                 
                                 {/* Social Icons */}
-                                <Stack direction="row" spacing={2}>
+                                <Stack direction="row" spacing={1.5}>
                                     <Box sx={{
                                         width: 44,
                                         height: 44,
@@ -799,12 +845,12 @@ export default function LandingPage() {
                         {/* Bottom Section - Copyright & Credit */}
                         <Box sx={{
                             borderTop: '1px solid #444444',
-                            pt: 6,
+                            pt: 3,
                             display: 'flex',
                             flexDirection: { xs: 'column', md: 'row' },
                             justifyContent: 'space-between',
                             alignItems: { xs: 'flex-start', md: 'center' },
-                            gap: { xs: 4, md: 0 }
+                            gap: { xs: 2, md: 0 }
                         }}>
                             <Typography sx={{
                                 fontSize: { xs: '0.75rem', md: '0.85rem' },
@@ -829,7 +875,7 @@ export default function LandingPage() {
                             fontSize: { xs: '0.7rem', md: '0.75rem' },
                             fontWeight: 500,
                             color: '#666666',
-                            mt: 4,
+                            mt: 2,
                             textAlign: 'center',
                             lineHeight: 1.6
                         }}>
