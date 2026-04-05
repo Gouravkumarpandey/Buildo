@@ -7,9 +7,10 @@ import axios from 'axios';
 import { useAuth } from '@/context/AuthContext';
 import {
     Activity, History, LayoutDashboard, GitBranch, LogOut,
-    Loader2, Plus, Trash2, Rocket, Github, Clock, X
+    Loader2, Plus, Trash2, Rocket, Github, Clock, X, Globe, Settings, ExternalLink, Shield, ArrowRight
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -50,12 +51,12 @@ export default function ReposPage() {
         setFormLoading(true);
         try {
             await axios.post(`${API}/api/repos`, form);
-            toast.success('✅ Repository connected!');
+            toast.success('Repository connected to grid.');
             setShowForm(false);
             setForm({ name: '', repoUrl: '', description: '' });
             fetchRepos();
         } catch (err: any) {
-            toast.error(err?.response?.data?.error || 'Failed to connect repo.');
+            toast.error(err?.response?.data?.error || 'Connection failed.');
         } finally { setFormLoading(false); }
     };
 
@@ -76,84 +77,135 @@ export default function ReposPage() {
     };
 
     if (authLoading || !user) return (
-        <div className="min-h-screen bg-[#020617] flex items-center justify-center">
-            <Loader2 className="animate-spin text-indigo-500 w-10 h-10" />
+        <div className="min-h-screen bg-white flex items-center justify-center">
+            <Loader2 className="animate-spin text-blue-600 w-10 h-10" />
         </div>
     );
 
     return (
-        <main className="min-h-screen bg-[#020617] text-slate-200">
-            <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.10),transparent_55%)] pointer-events-none" />
-
-            <div className="flex h-screen overflow-hidden">
-                {/* Sidebar */}
-                <aside className="w-20 flex flex-col items-center py-8 bg-black/25 border-r border-white/5 backdrop-blur-3xl z-10 shrink-0">
-                    <div className="bg-gradient-to-br from-indigo-600 to-violet-600 p-3 rounded-2xl shadow-lg shadow-indigo-500/40 mb-10">
-                        <Activity className="text-white w-6 h-6" />
-                    </div>
-                    <nav className="flex flex-col gap-6 flex-1">
-                        <Link href="/" title="Dashboard" className="text-slate-500 hover:text-slate-300 p-2.5 rounded-xl transition-colors hover:bg-white/5"><LayoutDashboard size={22} /></Link>
-                        <Link href="/repos" title="Repos" className="text-indigo-400 p-2.5 rounded-xl bg-indigo-500/10"><GitBranch size={22} /></Link>
-                        <Link href="/history" title="History" className="text-slate-500 hover:text-slate-300 p-2.5 rounded-xl transition-colors hover:bg-white/5"><History size={22} /></Link>
-                    </nav>
-                    <button onClick={logout} className="text-slate-500 hover:text-rose-400 p-2.5 rounded-xl transition-colors hover:bg-rose-500/10" title="Logout"><LogOut size={22} /></button>
-                </aside>
-
-                {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6 lg:p-10 relative z-10">
-                    <header className="flex justify-between items-center mb-8">
-                        <div>
-                            <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                                <GitBranch className="text-indigo-400 w-8 h-8" /> Repositories
-                            </h1>
-                            <p className="text-slate-500 text-sm mt-1">Connect GitHub repos for quick deployment</p>
+        <main className="min-h-screen bg-[#fcfcfd] text-[#101828] flex overflow-hidden font-sans">
+            {/* Sidebar */}
+            <aside className="w-20 lg:w-72 border-r border-[#eaecf0] bg-white h-screen flex flex-col p-4 gap-6 sticky top-0 shrink-0 z-40">
+                <div className="px-3 py-2">
+                    <Link href="/landing" className="flex items-center gap-3 group">
+                        <div className="w-10 h-10 bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/10 transition-transform group-hover:scale-105">
+                            <Globe className="w-5 h-5" />
                         </div>
-                        <button
-                            onClick={() => setShowForm(true)}
-                            className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all flex items-center gap-2"
-                        >
-                            <Plus className="w-4 h-4" /> Connect Repo
-                        </button>
-                    </header>
+                        <span className="hidden lg:block font-black text-2xl tracking-tighter text-[#101828]">NEXORA</span>
+                    </Link>
+                </div>
 
+                <nav className="flex-1 space-y-1">
+                    <Link href="/" className="flex items-center gap-3 px-3 py-2.5 text-[#667085] hover:text-[#101828] hover:bg-[#f9fafb] transition-all font-bold text-[13px] uppercase tracking-wider group">
+                        <LayoutDashboard className="w-5 h-5 text-[#98a2b3] group-hover:text-blue-600 transition-colors" />
+                        <span className="hidden lg:block">Dashboard</span>
+                    </Link>
+                    <Link href="/repos" className="flex items-center gap-3 px-3 py-2.5 bg-[#f9fafb] text-blue-700 border-r-2 border-blue-600 transition-all font-bold text-[13px] uppercase tracking-wider">
+                        <GitBranch className="w-5 h-5 text-blue-600" />
+                        <span className="hidden lg:block">Repositories</span>
+                    </Link>
+                    <Link href="/history" className="flex items-center gap-3 px-3 py-2.5 text-[#667085] hover:text-[#101828] hover:bg-[#f9fafb] transition-all font-bold text-[13px] uppercase tracking-wider group">
+                        <History className="w-5 h-5 text-[#98a2b3] group-hover:text-blue-600 transition-colors" />
+                        <span className="hidden lg:block">History</span>
+                    </Link>
+                    <div className="pt-4 mt-4 border-t border-[#eaecf0]">
+                       <p className="hidden lg:block px-3 text-[10px] font-bold text-[#98a2b3] uppercase tracking-[0.2em] mb-2">Grid Configuration</p>
+                       <Link href="#" className="flex items-center gap-3 px-3 py-2.5 text-[#667085] hover:text-[#101828] hover:bg-[#f9fafb] transition-all font-bold text-[13px] uppercase tracking-wider group">
+                          <Settings className="w-5 h-5 text-[#98a2b3] group-hover:text-blue-600 transition-colors" />
+                          <span className="hidden lg:block">Settings</span>
+                       </Link>
+                       <Link href="#" className="flex items-center gap-3 px-3 py-2.5 text-[#667085] hover:text-[#101828] hover:bg-[#f9fafb] transition-all font-bold text-[13px] uppercase tracking-wider group">
+                          <Shield className="w-5 h-5 text-[#98a2b3] group-hover:text-blue-600 transition-colors" />
+                          <span className="hidden lg:block">Architecture</span>
+                       </Link>
+                    </div>
+                </nav>
+
+                <div className="mt-auto border-t border-[#eaecf0] pt-4">
+                     <div className="hidden lg:flex items-center gap-3 px-3 py-4 mb-2">
+                        <div className="w-10 h-10 bg-[#f2f4f7] border border-[#eaecf0] flex items-center justify-center font-bold text-blue-600 shadow-sm">
+                           {user.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div className="min-w-0">
+                           <p className="text-sm font-bold text-[#101828] truncate">{user.name}</p>
+                           <p className="text-[10px] text-[#667085] uppercase font-bold tracking-widest">Admin Node</p>
+                        </div>
+                     </div>
+                     <button onClick={logout} className="w-full flex items-center gap-3 px-3 py-3 text-[#667085] hover:text-red-600 hover:bg-red-50 transition-all font-bold text-[13px] uppercase tracking-wider group">
+                        <LogOut className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                        <span className="hidden lg:block">Terminate Session</span>
+                    </button>
+                </div>
+            </aside>
+
+            {/* Main Content */}
+            <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                <header className="sticky top-0 z-30 flex items-center justify-between px-8 h-20 border-b border-[#eaecf0] bg-white/80 backdrop-blur-md shrink-0">
+                    <div className="flex items-center gap-4">
+                         <h1 className="text-xl font-black text-[#101828] uppercase tracking-tighter flex items-center gap-3 italic">
+                            <GitBranch className="text-blue-600 w-6 h-6" /> Source Catalog
+                        </h1>
+                        <div className="h-6 w-[1px] bg-[#eaecf0] hidden md:block" />
+                        <p className="hidden md:block text-[11px] font-bold text-[#667085] uppercase tracking-widest bg-[#f9fafb] px-3 py-1 rounded-full border border-[#eaecf0]">
+                           {repos.length} Connected Repositories
+                        </p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <ThemeToggle />
+                      <button
+                          onClick={() => setShowForm(true)}
+                          className="bauhaus-button px-6 py-2.5 text-xs"
+                      >
+                          <Plus className="w-4 h-4" /> Connect Source
+                      </button>
+                    </div>
+                </header>
+
+                <div className="flex-1 overflow-y-auto p-10 relative bauhaus-pattern">
+                    
                     {/* Connect Repo Modal */}
                     {showForm && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowForm(false)}>
-                            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-                            <div className="relative bg-slate-900 border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
-                                <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-bold text-white">Connect Repository</h2>
-                                    <button onClick={() => setShowForm(false)} className="text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#101828]/20 backdrop-blur-sm animate-in fade-in duration-200">
+                             <div className="bauhaus-card bg-white w-full max-w-md p-8 relative shadow-2xl shadow-blue-900/10 animate-in zoom-in-95 duration-200">
+                                <button onClick={() => setShowForm(false)} className="absolute top-4 right-4 text-[#98a2b3] hover:text-[#101828] transition-colors"><X className="w-5 h-5" /></button>
+                                
+                                <div className="text-center mb-8">
+                                   <div className="w-12 h-12 bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-4 border border-blue-100">
+                                      <GitBranch className="w-6 h-6" />
+                                   </div>
+                                   <h2 className="text-2xl font-black text-[#101828] uppercase italic tracking-tighter">Source Connection</h2>
+                                   <p className="text-sm font-medium text-[#667085] mt-1">Initialize direct access to your compute source.</p>
                                 </div>
-                                <form onSubmit={handleConnect} className="space-y-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-400 mb-2">Project Name</label>
+
+                                <form onSubmit={handleConnect} className="space-y-6">
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest ml-1">Grid Name</label>
                                         <input type="text" value={form.name}
                                             onChange={e => setForm({ ...form, name: e.target.value })}
-                                            placeholder="my-project" required
-                                            className="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all" />
+                                            placeholder="Production-Engine-01" required
+                                            className="bauhaus-input w-full text-sm font-medium border-[#eaecf0]" />
                                     </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-400 mb-2">GitHub URL</label>
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest ml-1">GitHub Endpoint</label>
                                         <div className="relative">
-                                            <Github className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
+                                            <Github className="absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] w-4 h-4" />
                                             <input type="url" value={form.repoUrl}
                                                 onChange={e => setForm({ ...form, repoUrl: e.target.value })}
-                                                placeholder="https://github.com/user/repo" required
-                                                className="w-full bg-slate-800 border border-slate-700 text-white rounded-xl pl-11 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all" />
+                                                placeholder="https://github.com/org/repo" required
+                                                className="bauhaus-input w-full pl-10 text-sm font-medium border-[#eaecf0]" />
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-400 mb-2">Description <span className="text-slate-600">(optional)</span></label>
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest ml-1">Domain Logic <span className="italic">(optional)</span></label>
                                         <input type="text" value={form.description}
                                             onChange={e => setForm({ ...form, description: e.target.value })}
-                                            placeholder="Brief description..."
-                                            className="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all" />
+                                            placeholder="Primary architecture source for production node."
+                                            className="bauhaus-input w-full text-sm font-medium border-[#eaecf0]" />
                                     </div>
                                     <button type="submit" disabled={formLoading}
-                                        className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-60">
-                                        {formLoading ? <Loader2 className="animate-spin w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                                        {formLoading ? 'Connecting...' : 'Connect'}
+                                        className="w-full bauhaus-button py-4 justify-center text-sm">
+                                        {formLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                                        {formLoading ? 'Configuring Node...' : 'Commit Connection'}
                                     </button>
                                 </form>
                             </div>
@@ -161,62 +213,80 @@ export default function ReposPage() {
                     )}
 
                     {/* Repos Grid */}
-                    {loading ? (
-                        <div className="flex items-center justify-center p-16">
-                            <Loader2 className="animate-spin text-indigo-500 w-8 h-8" />
-                        </div>
-                    ) : repos.length === 0 ? (
-                        <div className="text-center py-20">
-                            <GitBranch className="w-16 h-16 mx-auto mb-4 text-slate-700" />
-                            <h3 className="text-xl font-bold text-slate-400 mb-2">No repositories connected</h3>
-                            <p className="text-slate-600 mb-6">Connect a GitHub repo to deploy it instantly</p>
-                            <button onClick={() => setShowForm(true)}
-                                className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-3 rounded-xl transition-colors inline-flex items-center gap-2">
-                                <Plus className="w-4 h-4" /> Connect First Repo
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                            {repos.map(repo => (
-                                <div key={repo._id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-indigo-500/30 transition-all group">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="flex items-center gap-3">
-                                            <div className="bg-slate-800 p-2 rounded-lg border border-white/5">
-                                                <Github className="w-5 h-5 text-slate-400" />
+                    <div className="relative z-10 max-w-7xl mx-auto">
+                        {loading ? (
+                            <div className="flex flex-col items-center justify-center p-20 gap-4">
+                                <Loader2 className="animate-spin text-blue-600 w-12 h-12" />
+                                <p className="text-xs font-bold text-[#98a2b3] uppercase tracking-[0.3em]">Querying Grid Sources...</p>
+                            </div>
+                        ) : repos.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-32 text-center bauhaus-card bg-white max-w-2xl mx-auto shadow-sm border-[#eaecf0]">
+                                <div className="w-20 h-20 bg-[#f9fafb] border border-[#eaecf0] flex items-center justify-center mb-6">
+                                   <GitBranch className="w-10 h-10 text-[#d0d5dd]" />
+                                </div>
+                                <h3 className="text-2xl font-black text-[#101828] uppercase italic mb-3 tracking-tighter">Zero Sources Detected</h3>
+                                <p className="text-sm font-medium text-[#667085] mb-8 max-w-sm mx-auto">Connect a primary GitHub repository to Nexora to begin automated grid deployment.</p>
+                                <button onClick={() => setShowForm(true)}
+                                    className="bauhaus-button px-8 py-4 text-sm">
+                                    <Plus className="w-5 h-5" /> Connect Initial Source
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                                {repos.map(repo => (
+                                    <div key={repo._id} className="bauhaus-card bg-white p-6 transition-all group hover:shadow-xl hover:shadow-blue-900/5 hover:border-blue-600/30 flex flex-col border-[#eaecf0]">
+                                        <div className="flex items-start justify-between mb-6">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-12 h-12 bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/10 group-hover:scale-105 transition-transform">
+                                                    <Github className="w-6 h-6" />
+                                                </div>
+                                                <div className="min-w-0">
+                                                    <h3 className="text-[#101828] font-black text-lg uppercase leading-none tracking-tight truncate">{repo.name}</h3>
+                                                    <p className="text-[#667085] text-[10px] font-bold uppercase mt-1.5 line-clamp-1 italic tracking-wider">
+                                                       {repo.description || 'Global Compute Resource'}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h3 className="text-white font-bold text-sm">{repo.name}</h3>
-                                                {repo.description && (
-                                                    <p className="text-slate-500 text-xs mt-0.5 line-clamp-1">{repo.description}</p>
-                                                )}
+                                            <button onClick={() => handleDelete(repo._id, repo.name)}
+                                                disabled={deletingId === repo._id}
+                                                className="text-[#d0d5dd] hover:text-red-600 transition-all p-1.5 hover:bg-red-50">
+                                                {deletingId === repo._id ? <Loader2 className="animate-spin w-4 h-4" /> : <Trash2 className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+
+                                        <div className="mb-6 p-4 bg-[#f9fafb] border border-[#eaecf0] rounded-none group-hover:bg-blue-50 group-hover:border-blue-100 transition-colors">
+                                            <div className="flex items-center justify-between gap-3 overflow-hidden">
+                                               <span className="text-[11px] font-bold text-[#101828] truncate uppercase tracking-tighter">
+                                                  {repo.repoUrl.replace('https://github.com/', 'git://')}
+                                               </span>
+                                               <ExternalLink className="w-3 h-3 text-[#98a2b3] shrink-0" />
                                             </div>
                                         </div>
-                                        <button onClick={() => handleDelete(repo._id, repo.name)}
-                                            disabled={deletingId === repo._id}
-                                            className="text-slate-600 hover:text-rose-400 transition-colors opacity-0 group-hover:opacity-100">
-                                            {deletingId === repo._id ? <Loader2 className="animate-spin w-4 h-4" /> : <Trash2 className="w-4 h-4" />}
-                                        </button>
+
+                                        <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#f2f4f7]">
+                                            {repo.lastDeployedAt ? (
+                                                <div className="flex items-center gap-2">
+                                                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                                     <span className="text-[10px] font-bold text-[#667085] uppercase tracking-widest">
+                                                       Synced {new Date(repo.lastDeployedAt).toLocaleDateString()}
+                                                     </span>
+                                                </div>
+                                            ) : (
+                                                <div className="flex items-center gap-2">
+                                                     <div className="w-1.5 h-1.5 rounded-full bg-[#d0d5dd]" />
+                                                     <span className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest italic">Idle Status</span>
+                                                </div>
+                                            )}
+                                            <button onClick={() => handleDeploy(repo)}
+                                                className="text-blue-600 hover:text-blue-700 font-black text-[11px] uppercase tracking-[0.1em] flex items-center gap-1.5 group/btn">
+                                                Launch <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                                            </button>
+                                        </div>
                                     </div>
-
-                                    <p className="text-xs text-slate-600 font-mono mb-4 truncate">
-                                        {repo.repoUrl.replace('https://github.com/', 'github.com/')}
-                                    </p>
-
-                                    {repo.lastDeployedAt && (
-                                        <p className="text-xs text-slate-600 flex items-center gap-1 mb-4">
-                                            <Clock className="w-3 h-3" />
-                                            Last deployed {new Date(repo.lastDeployedAt).toLocaleDateString()}
-                                        </p>
-                                    )}
-
-                                    <button onClick={() => handleDeploy(repo)}
-                                        className="w-full bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 text-indigo-300 font-semibold py-2.5 rounded-xl text-sm transition-all flex items-center justify-center gap-2 group-hover:border-indigo-500/50">
-                                        <Rocket className="w-4 h-4" /> Deploy Now
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </main>

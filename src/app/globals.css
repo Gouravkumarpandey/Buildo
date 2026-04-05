@@ -4,204 +4,113 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ─── Dark theme (default) ──────────────────────────────── */
-:root,
-.dark {
-  --bg-base: #020617;
-  --bg-surface: #0f172a;
-  --bg-card: rgba(255 255 255 / 0.04);
-  --border: rgba(255 255 255 / 0.08);
-  --text-base: #e2e8f0;
-  --text-muted: #64748b;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
-}
-
-/* ─── Light theme ───────────────────────────────────────── */
-:root:not(.dark) {
-  --bg-base: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-card: rgba(0 0 0 / 0.03);
-  --border: rgba(0 0 0 / 0.08);
-  --text-base: #0f172a;
-  --text-muted: #64748b;
-}
-
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
+:root {
+  --bg-main: #FFFFFF;
+  --bg-secondary: #F3F2F1;
+  --color-primary: #0078D4; /* Microsoft Azure Blue */
+  --color-secondary: #50E6FF; /* Cyan Accent */
+  --color-text: #323130;
+  --color-muted: #605E5C;
+  --color-border: #D2D0CE;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 body {
   font-family: var(--font-sans);
-  background: var(--bg-base);
-  color: var(--text-base);
+  background-color: var(--bg-main);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Azure Enterprise Utilities ────────────────────────── */
+
+.azure-bg {
+  background-color: var(--bg-main);
+}
+
+.azure-hero-gradient {
+  background: linear-gradient(135deg, #001D3D 0%, #0078D4 100%);
+}
+
+.azure-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
+  transition: all 0.2s ease-in-out;
+}
+
+.azure-card:hover {
+  box-shadow: 0 6.4px 14.4px 0 rgba(0,0,0,0.132), 0 1.2px 3.6px 0 rgba(0,0,0,0.108);
+  border-color: var(--color-primary);
+}
+
+.azure-button {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: 0.8rem 1.8rem;
+  font-weight: 600;
+  border-radius: 2px; /* Microsoft's signature slightly rounded-square look */
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.azure-button:hover {
+  background-color: #005a9e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.azure-button-secondary {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 0.8rem 1.8rem;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.azure-button-secondary:hover {
+  background-color: #F3F2F1;
+}
+
+.azure-input {
+  border: 1px solid var(--color-muted);
+  padding: 0.7rem 1rem;
+  background: #FFFFFF;
+  border-radius: 2px;
+  outline: none;
+}
+
+.azure-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
 ::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.3);
-  border-radius: 100px;
+  background: #C8C6C4;
+  border: 2px solid var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb:hover { background: #A19F9D; }
+
+/* ─── Buildo Overrides & Legacy Mapping ──────────────────── */
+.brutalist-card, .vercel-card, .bauhaus-card { @apply azure-card; }
+.brutalist-button, .vercel-button, .bauhaus-button { @apply azure-button; }
+.brutalist-input, .vercel-input, .bauhaus-input { @apply azure-input; }
+
+.brutalist-sidebar {
+  background: #F3F2F1 !important;
+  border-right: 1px solid var(--color-border) !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.6);
-}
-
-/* ─── Animations ────────────────────────────────────────── */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes glow-pulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
-  }
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.4s ease-out both;
-}
-
-/* ─── xterm.js overrides ────────────────────────────────── */
 .xterm {
   padding: 12px !important;
+  border: 1px solid var(--color-border);
+  background: #000000 !important;
 }
 
-.xterm-viewport {
-  overflow-y: auto !important;
-}
-
-/* ─── Table ──────────────────────────────────────────────── */
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-/* ─── Glass Card ─────────────────────────────────────────── */
-.glass-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-}
-
-/* ─── Light mode page overrides ─────────────────────────── */
-/* These override the hardcoded dark Tailwind classes when .dark is absent */
-html:not(.dark) main,
-html:not(.dark) nav,
-html:not(.dark) footer,
-html:not(.dark) section,
-html:not(.dark) aside {
-  --tw-bg-opacity: 1;
-}
-
-/* Map dark utility colors → light equivalents */
-html:not(.dark) .bg-black {
-  background-color: #f8fafc !important;
-}
-
-html:not(.dark) .bg-zinc-950 {
-  background-color: #f1f5f9 !important;
-}
-
-html:not(.dark) .bg-zinc-900 {
-  background-color: #e2e8f0 !important;
-}
-
-html:not(.dark) .bg-zinc-800 {
-  background-color: #cbd5e1 !important;
-}
-
-html:not(.dark) .bg-black\/80 {
-  background-color: rgba(248, 250, 252, 0.85) !important;
-}
-
-/* Text colors in light mode */
-html:not(.dark) .text-white {
-  color: #0f172a !important;
-}
-
-html:not(.dark) .text-zinc-300 {
-  color: #334155 !important;
-}
-
-html:not(.dark) .text-zinc-400 {
-  color: #475569 !important;
-}
-
-html:not(.dark) .text-zinc-500 {
-  color: #64748b !important;
-}
-
-html:not(.dark) .text-zinc-600 {
-  color: #475569 !important;
-}
-
-/* Border colors in light mode */
-html:not(.dark) .border-zinc-800 {
-  border-color: #cbd5e1 !important;
-}
-
-html:not(.dark) .border-zinc-700 {
-  border-color: #94a3b8 !important;
-}
-
-html:not(.dark) .border-white\/\[0\.06\] {
-  border-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-html:not(.dark) .border-white\/\[0\.05\] {
-  border-color: rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Navbar backdrop in light mode */
-html:not(.dark) nav.backdrop-blur-xl {
-  background-color: rgba(248, 250, 252, 0.9) !important;
-}
-
-/* Logo svg fill in light mode */
-html:not(.dark) svg[fill="white"] {
-  fill: #0f172a !important;
-}

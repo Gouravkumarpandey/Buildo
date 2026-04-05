@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Rocket, Github, Loader2 } from 'lucide-react';
+import { Rocket, Github, Loader2, ArrowRight, Zap, Layers, Globe } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
@@ -18,7 +18,6 @@ export const DeployForm: React.FC<DeployFormProps> = ({ onDeployStarted, initial
     const [projectName, setProjectName] = useState(initialProjectName);
     const [isLoading, setIsLoading] = useState(false);
 
-    // Update fields if parent passes new initial values (e.g., from repos page)
     useEffect(() => {
         if (initialRepoUrl) setRepoUrl(initialRepoUrl);
         if (initialProjectName) setProjectName(initialProjectName);
@@ -36,11 +35,11 @@ export const DeployForm: React.FC<DeployFormProps> = ({ onDeployStarted, initial
                 deployTarget: 'docker',
             });
             onDeployStarted(response.data.deploymentId, projectName);
-            toast.success(`🚀 Deployment started for "${projectName}"`);
+            toast.success(`Deployment initialized for "${projectName}"`);
             setRepoUrl('');
             setProjectName('');
         } catch (error: any) {
-            const msg = error?.response?.data?.error || 'Failed to start deployment.';
+            const msg = error?.response?.data?.error || 'Initialization failed.';
             toast.error(msg);
         } finally {
             setIsLoading(false);
@@ -48,62 +47,77 @@ export const DeployForm: React.FC<DeployFormProps> = ({ onDeployStarted, initial
     };
 
     return (
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl w-full">
-            <div className="flex items-center gap-3 mb-8">
-                <div className="bg-gradient-to-br from-indigo-500 to-violet-600 p-2.5 rounded-xl shadow-lg shadow-indigo-500/30">
-                    <Rocket className="text-white w-5 h-5" />
+        <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex items-center gap-4 mb-10">
+                <div className="w-12 h-12 bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/10">
+                    <Rocket className="text-white w-6 h-6" />
                 </div>
                 <div>
-                    <h2 className="text-xl font-bold text-white">New Deployment</h2>
-                    <p className="text-xs text-slate-400 mt-0.5">Clone → Build → Deploy in seconds</p>
+                    <h2 className="text-2xl font-black text-[#101828] uppercase tracking-tighter italic leading-none">Initialize Engine</h2>
+                    <p className="text-[10px] font-bold text-[#667085] uppercase mt-1 tracking-widest bg-[#f9fafb] px-2 py-0.5 border border-[#eaecf0] inline-block font-sans">
+                       Clone • Build • Propagate
+                    </p>
                 </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">Project Name</label>
+            <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="space-y-2">
+                    <label className="block text-[11px] font-bold text-[#98a2b3] uppercase tracking-[0.2em] ml-1">Grid Target Name</label>
                     <input
                         type="text"
-                        placeholder="e.g. my-awesome-app"
+                        placeholder="E.G. PRODUCTION-CLUSTER-01"
                         value={projectName}
                         onChange={(e) => setProjectName(e.target.value)}
-                        className="w-full bg-slate-900/60 border border-slate-700 text-white rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all placeholder-slate-600"
+                        className="w-full bauhaus-input bg-white h-12 text-sm font-bold placeholder-[#d0d5dd]"
                         required
                     />
                 </div>
 
-                <div>
-                    <label className="block text-sm font-medium text-slate-400 mb-2">GitHub Repository URL</label>
+                <div className="space-y-2">
+                    <label className="block text-[11px] font-bold text-[#98a2b3] uppercase tracking-[0.2em] ml-1">Source Endpoint (GitHub)</label>
                     <div className="relative">
-                        <Github className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
+                        <Github className="absolute left-4 top-1/2 -translate-y-1/2 text-[#98a2b3] w-4.5 h-4.5" />
                         <input
                             type="url"
-                            placeholder="https://github.com/user/repo"
+                            placeholder="https://github.com/org/repository"
                             value={repoUrl}
                             onChange={(e) => setRepoUrl(e.target.value)}
-                            className="w-full bg-slate-900/60 border border-slate-700 text-white rounded-xl pl-11 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none transition-all placeholder-slate-600"
+                            className="w-full bauhaus-input pl-12 bg-white h-12 text-sm font-bold placeholder-[#d0d5dd]"
                             required
                         />
                     </div>
                 </div>
 
-                {/* Pipeline Steps Indicator */}
-                <div className="flex items-center gap-2 py-3 px-4 bg-slate-900/40 rounded-xl border border-slate-800">
-                    {['Clone', 'Build', 'Deploy', 'Live'].map((step, i, arr) => (
-                        <React.Fragment key={step}>
-                            <span className={`text-xs font-semibold ${i === 0 && isLoading ? 'text-indigo-400 animate-pulse' : 'text-slate-500'}`}>{step}</span>
-                            {i < arr.length - 1 && <span className="text-slate-700 text-xs flex-1 text-center">──→</span>}
-                        </React.Fragment>
-                    ))}
+                <div className="p-5 bg-[#f9fafb] border border-[#eaecf0] relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 opacity-20 group-hover:opacity-100 transition-opacity" />
+                    <div className="flex justify-between items-center px-4 relative z-10">
+                        {[
+                            { label: 'Source', icon: Github },
+                            { label: 'Optimize', icon: Zap },
+                            { label: 'Bundle', icon: Layers },
+                            { label: 'Live', icon: Globe }
+                        ].map((step, i, arr) => (
+                            <React.Fragment key={step.label}>
+                                <div className="flex flex-col items-center gap-1.5 min-w-[60px]">
+                                    <step.icon className={`w-4 h-4 ${i === 0 && isLoading ? 'text-blue-600 animate-pulse' : 'text-[#98a2b3]'}`} />
+                                    <span className="text-[9px] font-black uppercase tracking-widest text-[#667085]">{step.label}</span>
+                                </div>
+                                {i < arr.length - 1 && (
+                                    <div className="flex-1 h-px bg-[#eaecf0] mx-2" />
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </div>
                 </div>
 
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-indigo-500/20 transform transition-all hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full bauhaus-button py-5 text-sm font-black justify-center shadow-xl shadow-blue-500/10 group active:scale-[0.98] transition-transform"
                 >
-                    {isLoading ? <Loader2 className="animate-spin w-5 h-5" /> : <Rocket className="w-5 h-5" />}
-                    {isLoading ? 'Starting Pipeline...' : 'Deploy Now →'}
+                    {isLoading ? <Loader2 className="animate-spin w-5 h-5 mr-3" /> : <Rocket className="w-5 h-5 mr-3 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />}
+                    {isLoading ? 'INITIATING ENGINE...' : 'INITIALIZE PRODUCTION LAUNCH'}
+                    {!isLoading && <ArrowRight className="w-4 h-4 ml-3 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-2" />}
                 </button>
             </form>
         </div>

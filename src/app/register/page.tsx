@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowRight, ArrowLeft, Globe, Shield, Rocket, Check, Mail, User, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -13,114 +13,73 @@ function PlanStep({ onContinue }: { onContinue: (plan: 'pro' | 'hobby') => void 
     const [selected, setSelected] = useState<'pro' | 'hobby'>('pro');
 
     return (
-        <div className="w-full max-w-[420px] mx-auto">
-            {/* Card */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
-                <div className="px-8 pt-10 pb-8">
-                    {/* Title */}
-                    <h1 className="text-2xl font-bold text-white text-center leading-snug mb-7">
-                        Your first deploy<br />
-                        is just a sign-up away.
-                    </h1>
+        <div className="w-full max-w-[460px] mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="text-center">
+                <h1 className="text-4xl font-black text-[#101828] leading-[0.95] mb-4 tracking-tighter uppercase italic">
+                    Initialize<br />Engine Phase
+                </h1>
+                <p className="text-sm font-medium text-[#667085]">Select your compute distribution tier on the global grid.</p>
+            </div>
 
-                    {/* Plan type label */}
-                    <p className="text-xs text-zinc-500 uppercase tracking-widest mb-3 font-medium">
-                        Plan Type
-                    </p>
-
-                    {/* Options */}
-                    <div className="space-y-2">
-                        {/* Pro */}
-                        <label
-                            className={`flex items-center justify-between px-4 py-3.5 rounded-xl border cursor-pointer transition-all ${selected === 'pro'
-                                ? 'border-zinc-600 bg-zinc-800'
-                                : 'border-zinc-800 bg-zinc-900 hover:bg-zinc-800/50'
-                                }`}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className={`w-3 h-3 rounded-full border-2 flex items-center justify-center transition-colors ${selected === 'pro' ? 'border-white' : 'border-zinc-600'
-                                        }`}
-                                >
-                                    {selected === 'pro' && (
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                                    )}
-                                </div>
-                                <span className="text-sm text-zinc-300">I'm working on commercial projects</span>
-                            </div>
-                            <span className="text-xs font-semibold bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                                Pro
-                            </span>
-                            <input
-                                type="radio"
-                                name="plan"
-                                value="pro"
-                                checked={selected === 'pro'}
-                                onChange={() => setSelected('pro')}
-                                className="sr-only"
-                            />
-                        </label>
-
-                        {/* Hobby */}
-                        <label
-                            className={`flex items-center justify-between px-4 py-3.5 rounded-xl border cursor-pointer transition-all ${selected === 'hobby'
-                                ? 'border-zinc-600 bg-zinc-800'
-                                : 'border-zinc-800 bg-zinc-900 hover:bg-zinc-800/50'
-                                }`}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div
-                                    className={`w-3 h-3 rounded-full border-2 flex items-center justify-center transition-colors ${selected === 'hobby' ? 'border-white' : 'border-zinc-600'
-                                        }`}
-                                >
-                                    {selected === 'hobby' && (
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                                    )}
-                                </div>
-                                <span className="text-sm text-zinc-300">I'm working on personal projects</span>
-                            </div>
-                            <span className="text-xs font-semibold bg-zinc-700 text-zinc-300 px-2 py-0.5 rounded-full">
-                                Hobby
-                            </span>
-                            <input
-                                type="radio"
-                                name="plan"
-                                value="hobby"
-                                checked={selected === 'hobby'}
-                                onChange={() => setSelected('hobby')}
-                                className="sr-only"
-                            />
-                        </label>
+            <div className="bauhaus-card bg-white p-8 space-y-6 shadow-xl shadow-blue-900/5">
+                <div className="space-y-3">
+                    {/* Pro */}
+                    <div
+                        onClick={() => setSelected('pro')}
+                        className={`p-5 border cursor-pointer transition-all duration-200 relative overflow-hidden ${selected === 'pro'
+                            ? 'border-blue-600 bg-blue-50/50 ring-1 ring-blue-600'
+                            : 'border-[#eaecf0] bg-white hover:bg-[#f9fafb]'
+                            }`}
+                    >
+                        <div className="flex items-center justify-between mb-2">
+                           <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selected === 'pro' ? 'border-blue-600 bg-blue-600' : 'border-[#d0d5dd]'}`}>
+                                 {selected === 'pro' && <Check className="w-3 h-3 text-white" />}
+                              </div>
+                              <span className="text-sm font-extrabold uppercase tracking-tight">Professional</span>
+                           </div>
+                           <span className="text-[10px] font-bold text-blue-600 uppercase py-0.5 px-2 bg-blue-100/50">Primary Tier</span>
+                        </div>
+                        <p className="text-xs text-[#667085] ml-8">Advanced scaling for commercial grid operations.</p>
                     </div>
 
-                    {/* Continue button */}
-                    <button
-                        onClick={() => onContinue(selected)}
-                        className="w-full mt-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium rounded-xl border border-zinc-700 transition-all active:scale-[0.99]"
+                    {/* Hobby */}
+                    <div
+                        onClick={() => setSelected('hobby')}
+                        className={`p-5 border cursor-pointer transition-all duration-200 relative overflow-hidden ${selected === 'hobby'
+                            ? 'border-blue-600 bg-blue-50/50 ring-1 ring-blue-600'
+                            : 'border-[#eaecf0] bg-white hover:bg-[#f9fafb]'
+                            }`}
                     >
-                        Continue
-                    </button>
-
-                    {/* Terms */}
-                    <p className="text-center text-xs text-zinc-600 mt-5">
-                        By joining, you agree to our{' '}
-                        <a href="#" className="text-zinc-400 hover:text-white transition-colors">Terms of Service</a>
-                        {' '}and{' '}
-                        <a href="#" className="text-zinc-400 hover:text-white transition-colors">Privacy Policy</a>
-                    </p>
+                        <div className="flex items-center justify-between mb-2">
+                           <div className="flex items-center gap-3">
+                              <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selected === 'hobby' ? 'border-blue-600 bg-blue-600' : 'border-[#d0d5dd]'}`}>
+                                 {selected === 'hobby' && <Check className="w-3 h-3 text-white" />}
+                              </div>
+                              <span className="text-sm font-extrabold uppercase tracking-tight">Personal</span>
+                           </div>
+                           <span className="text-[10px] font-bold text-[#667085] uppercase py-0.5 px-2 bg-[#f2f4f7]">Hobbyist</span>
+                        </div>
+                        <p className="text-xs text-[#667085] ml-8">Rapid prototyping for experimental compute.</p>
+                    </div>
                 </div>
 
-                {/* Enterprise banner */}
-                <div className="px-8 py-4 bg-gradient-to-r from-purple-900/60 to-violet-900/60 border-t border-purple-800/40">
-                    <p className="text-center text-xs text-purple-300">
-                        Have a complex company use case? Get{' '}
-                        <span className="font-bold text-white">Enterprise grade</span>
-                        {' '}assistance{' '}
-                        <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-purple-500 text-purple-400 text-[10px] ml-1">
-                            →
-                        </span>
-                    </p>
-                </div>
+                <button
+                    onClick={() => onContinue(selected)}
+                    className="w-full bauhaus-button py-4 text-base justify-center mt-4"
+                >
+                    Continue to Registration <ArrowRight className="w-5 h-5" />
+                </button>
+
+                <p className="text-center text-[10px] font-bold text-[#98a2b3] uppercase tracking-[0.2em] leading-relaxed">
+                    By initializing, you agree to our <br />
+                    <a href="#" className="text-blue-600 hover:underline">Nexus Protocols</a> & <a href="#" className="text-blue-600 hover:underline">Data Policies</a>
+                </p>
+            </div>
+            
+            <div className="flex items-center justify-center gap-6 opacity-40 grayscale group">
+               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-blue-600" /><span className="text-[10px] font-bold uppercase tracking-widest text-[#101828]">SOC2_AUDITED</span></div>
+               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-blue-600" /><span className="text-[10px] font-bold uppercase tracking-widest text-[#101828]">E2E_ENCRYPTED</span></div>
             </div>
         </div>
     );
@@ -144,132 +103,104 @@ function AccountStep({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password.length < 6) {
-            toast.error('Password must be at least 6 characters.');
-            return;
-        }
         setLoading(true);
         try {
             await register(name, email, password);
-            toast.success('Account created! Welcome 🎉');
+            toast.success('Grid Access Granted.');
             router.push('/');
         } catch (err: any) {
-            toast.error(err?.response?.data?.error || 'Registration failed. Please try again.');
+            toast.error(err?.response?.data?.error || 'Registration failed.');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="w-full max-w-[380px] mx-auto space-y-4">
-            {/* Plan badge + back */}
-            <div className="flex items-center justify-between mb-2">
+        <div className="w-full max-w-[420px] mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex items-center justify-between px-2">
                 <button
                     onClick={onBack}
-                    className="text-zinc-500 hover:text-white text-sm flex items-center gap-1.5 transition-colors"
+                    className="text-[#667085] hover:text-[#101828] font-bold text-[10px] uppercase tracking-widest flex items-center gap-1.5 transition-colors"
                 >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
-                    Back
+                    <ArrowLeft className="w-3.5 h-3.5" /> Back to tier
                 </button>
-                <span
-                    className={`text-xs font-semibold px-2.5 py-1 rounded-full ${plan === 'pro'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-zinc-700 text-zinc-300'
-                        }`}
-                >
-                    {plan === 'pro' ? 'Pro' : 'Hobby'}
-                </span>
+                <div className="text-[10px] font-bold px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 uppercase tracking-widest">
+                    Selected: {plan}
+                </div>
             </div>
 
-            <h1 className="text-2xl font-bold text-white text-center mb-6">
-                Create your account
-            </h1>
+            <div className="bauhaus-card bg-white p-8 shadow-xl shadow-blue-900/5">
+                <div className="text-center mb-8">
+                  <h1 className="text-3xl font-black text-[#101828] uppercase italic tracking-tighter">
+                      Identify Node
+                  </h1>
+                  <p className="text-xs font-medium text-[#667085] mt-1">Configure your root developer profile.</p>
+                </div>
 
-            <form onSubmit={handleSubmit} className="space-y-2">
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Full Name"
-                    required
-                    autoFocus
-                    className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-                />
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email Address"
-                    required
-                    className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password (min 6 characters)"
-                    required
-                    minLength={6}
-                    className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-                />
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full mt-1 bg-white hover:bg-zinc-100 text-black font-semibold py-3 rounded-lg text-sm transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                    {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-                    {loading ? 'Creating account...' : 'Create Account'}
-                </button>
-            </form>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest ml-1">Full Name</label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#98a2b3]" />
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="John Doe"
+                            required
+                            autoFocus
+                            className="w-full bauhaus-input pl-10 text-sm font-medium border-[#eaecf0]"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest ml-1">Work Email</label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#98a2b3]" />
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="john@company.com"
+                            required
+                            className="w-full bauhaus-input pl-10 text-sm font-medium border-[#eaecf0]"
+                        />
+                      </div>
+                    </div>
 
-            {/* Divider */}
-            <div className="flex items-center gap-3 py-1">
-                <div className="flex-1 h-px bg-zinc-800" />
-                <div className="flex-1 h-px bg-zinc-800" />
-            </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest ml-1">Grid Key</label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#98a2b3]" />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Min. 6 chars"
+                            required
+                            minLength={6}
+                            className="w-full bauhaus-input pl-10 text-sm font-medium border-[#eaecf0]"
+                        />
+                      </div>
+                    </div>
 
-            {/* Social signup options */}
-            <div className="space-y-2">
-                {[
-                    {
-                        label: 'Continue with Google',
-                        icon: (
-                            <svg width="18" height="18" viewBox="0 0 24 24">
-                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
-                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                            </svg>
-                        ),
-                    },
-                    {
-                        label: 'Continue with GitHub',
-                        icon: (
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        ),
-                    },
-                ].map(({ label, icon }) => (
                     <button
-                        key={label}
-                        type="button"
-                        className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 text-white text-sm font-medium transition-all hover:border-zinc-700 active:scale-[0.99]"
+                        type="submit"
+                        disabled={loading}
+                        className="w-full mt-4 bauhaus-button py-4 text-sm justify-center"
                     >
-                        {icon}
-                        {label}
+                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Commit Node Registration'}
                     </button>
-                ))}
-            </div>
+                </form>
 
-            <p className="text-center text-xs text-zinc-600 pt-1">
-                Already have an account?{' '}
-                <Link href="/login" className="text-zinc-400 hover:text-white transition-colors">
-                    Sign in
-                </Link>
-            </p>
+                <p className="text-center text-[11px] font-bold text-[#98a2b3] uppercase tracking-widest pt-8">
+                    Registered?{' '}
+                    <Link href="/login" className="text-blue-600 hover:underline">
+                        Access Domain
+                    </Link>
+                </p>
+            </div>
         </div>
     );
 }
@@ -285,32 +216,41 @@ export default function RegisterPage() {
     };
 
     return (
-        <main className="min-h-screen bg-black flex flex-col">
-            {/* ── Top bar ── */}
-            <div className="flex items-center justify-between px-6 py-5">
-                <Link href="/landing">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-                        <path d="M12 2L2 20h20L12 2z" />
-                    </svg>
+        <main className="min-h-screen bg-white flex flex-col items-center justify-center p-6 bauhaus-pattern">
+            
+            {/* ── Top branding ── */}
+            <div className="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-between px-8 md:px-12 bg-white/5 backdrop-blur-none pointer-events-none">
+                <Link href="/landing" className="flex items-center gap-2 pointer-events-auto">
+                    <div className="w-8 h-8 flex items-center justify-center bg-blue-600 shadow-lg shadow-blue-500/10">
+                         <Globe className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="font-extrabold text-xl tracking-tighter text-[#101828]">NEXORA</span>
                 </Link>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-6 pointer-events-auto">
                     <ThemeToggle />
                     <Link
                         href="/login"
-                        className="text-sm text-white border border-zinc-700 hover:border-zinc-500 px-4 py-1.5 rounded-md transition-colors"
+                        className="font-bold text-xs uppercase text-[#667085] hover:text-[#101828] transition-colors"
                     >
-                        Log In
+                        Sign In
                     </Link>
                 </div>
             </div>
 
             {/* ── Content ── */}
-            <div className="flex-1 flex items-center justify-center px-4 py-8">
+            <div className="w-full">
                 {step === 'plan' ? (
                     <PlanStep onContinue={handlePlanContinue} />
                 ) : (
                     <AccountStep plan={plan} onBack={() => setStep('plan')} />
                 )}
+            </div>
+            
+            {/* Bottom help */}
+            <div className="fixed bottom-8 flex items-center gap-8 justify-center w-full opacity-30 select-none">
+               <Shield className="w-6 h-6" />
+               <Globe className="w-6 h-6" />
+               <Rocket className="w-6 h-6" />
             </div>
         </main>
     );

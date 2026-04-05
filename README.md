@@ -1,6 +1,6 @@
-# Nexora Client - Intelligent CI/CD Deployment Engine
+# Buildo Client - Intelligent CI/CD Deployment Engine
 
-Frontend application for Nexora, a comprehensive CI/CD deployment platform.
+Frontend application for Buildo, a comprehensive CI/CD deployment platform.
 
 ## Getting Started
 

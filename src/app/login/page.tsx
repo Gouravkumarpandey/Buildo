@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowLeft, Github, Globe, Shield, Mail, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -18,87 +18,6 @@ const GoogleIcon = () => (
     </svg>
 );
 
-const GithubIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-    </svg>
-);
-
-const AppleIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-    </svg>
-);
-
-const SamlIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-        <rect x="3" y="11" width="18" height="11" rx="2" />
-        <path d="M7 11V7a5 5 0 0110 0v4" />
-    </svg>
-);
-
-const PasskeyIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-        <circle cx="9" cy="7" r="4" />
-        <path d="M3 21v-2a4 4 0 014-4h4" />
-        <path d="M16 18l2 2 4-4" />
-    </svg>
-);
-
-const GitLabIcon = () => (
-    <svg width="22" height="22" viewBox="0 0 24 24">
-        <path fill="#E24329" d="M12 21.638l-3.27-10.06H15.27L12 21.638z" />
-        <path fill="#FC6D26" d="M12 21.638l-6.764-10.06H8.73L12 21.638z" />
-        <path fill="#FCA326" d="M5.236 11.578L4.07 7.754a.457.457 0 00-.866 0L2 11.578l3.236 9.927V11.578z" />
-        <path fill="#FC6D26" d="M12 21.638l6.764-10.06H15.27L12 21.638z" />
-        <path fill="#FCA326" d="M18.764 11.578l1.166-3.824a.457.457 0 01.866 0L22 11.578l-3.236 9.927V11.578z" />
-        <path fill="#E24329" d="M18.764 11.578H15.27L18.764 21.505l3.236-9.927H18.764z" />
-        <path fill="#E24329" d="M5.236 11.578H8.73L5.236 21.505 2 11.578H5.236z" />
-        <path fill="#FC6D26" d="M8.73 11.578H15.27L12 21.638 8.73 11.578z" />
-    </svg>
-);
-
-const BitbucketIcon = () => (
-    <svg width="22" height="22" viewBox="0 0 24 24">
-        <path fill="#2684FF" d="M.778 1.213a.768.768 0 00-.768.892l3.263 19.81c.084.5.515.868 1.022.873H19.95a.768.768 0 00.77-.646l3.27-20.03a.768.768 0 00-.768-.891L.778 1.213zM14.52 15.53H9.522L8.17 8.471h7.561l-1.211 7.06z" />
-    </svg>
-);
-
-/* ── Social Button ──────────────────────────────────────── */
-function SocialButton({
-    icon,
-    label,
-    onClick,
-}: {
-    icon: React.ReactNode;
-    label: string;
-    onClick?: () => void;
-}) {
-    return (
-        <button
-            type="button"
-            onClick={onClick}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 text-white text-sm font-medium transition-all duration-150 hover:border-zinc-700 active:scale-[0.99]"
-        >
-            {icon}
-            {label}
-        </button>
-    );
-}
-
-/* ── Icon-only button (for Gitlab / Bitbucket row) ─────── */
-function IconButton({ icon, onClick }: { icon: React.ReactNode; onClick?: () => void }) {
-    return (
-        <button
-            type="button"
-            onClick={onClick}
-            className="flex-1 flex items-center justify-center py-3 rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 transition-all duration-150 hover:border-zinc-700 active:scale-[0.99]"
-        >
-            {icon}
-        </button>
-    );
-}
-
 /* ── Main Page ──────────────────────────────────────────── */
 export default function LoginPage() {
     const { login } = useAuth();
@@ -108,7 +27,6 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [showOther, setShowOther] = useState(false);
 
     const handleContinueWithEmail = (e: React.FormEvent) => {
         e.preventDefault();
@@ -121,137 +39,129 @@ export default function LoginPage() {
         setLoading(true);
         try {
             await login(email, password);
-            toast.success('Welcome back! 🚀');
+            toast.success('Welcome to the Grid.');
             router.push('/');
         } catch (err: any) {
-            toast.error(err?.response?.data?.error || 'Login failed. Check your credentials.');
+            toast.error(err?.response?.data?.error || 'Login failed.');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <main className="min-h-screen bg-black flex flex-col">
-            {/* ── Top bar ── */}
-            <div className="flex items-center justify-between px-6 py-5">
-                <Link href="/landing">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-                        <path d="M12 2L2 20h20L12 2z" />
-                    </svg>
-                </Link>
-                <div className="flex items-center gap-3">
-                    <ThemeToggle />
-                    <Link
-                        href="/register"
-                        className="text-sm text-white border border-zinc-700 hover:border-zinc-500 px-4 py-1.5 rounded-md transition-colors"
-                    >
-                        Sign Up
+        <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-white bauhaus-pattern">
+
+            <div className="w-full max-w-[400px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                
+                <div className="text-center space-y-4">
+                    <Link href="/landing" className="inline-flex items-center gap-2 mb-2 group">
+                        <div className="w-10 h-10 bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/10 group-hover:scale-105 transition-transform">
+                          <Globe className="w-5 h-5" />
+                        </div>
+                        <span className="font-black text-2xl tracking-tighter text-[#101828]">NEXORA</span>
                     </Link>
-                </div>
-            </div>
-
-            {/* ── Form area ── */}
-            <div className="flex-1 flex items-center justify-center px-4">
-                <div className="w-full max-w-[380px] space-y-4">
-                    <h1 className="text-2xl font-bold text-white text-center mb-6">
-                        Log in to Nexora
+                    <h1 className="text-3xl font-black text-[#101828] tracking-tighter uppercase italic">
+                        Access Domain
                     </h1>
+                    <p className="text-sm font-medium text-[#667085] max-w-xs mx-auto">
+                        Authenticate with your engineer credentials to access the global compute grid.
+                    </p>
+                </div>
 
-                    {/* Email step */}
+                <div className="bauhaus-card p-8 bg-white shadow-xl shadow-blue-900/5">
                     {step === 'email' ? (
-                        <form onSubmit={handleContinueWithEmail} className="space-y-2">
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Email Address"
-                                required
-                                autoFocus
-                                className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-                            />
+                        <form onSubmit={handleContinueWithEmail} className="space-y-5">
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-[0.2em] ml-1">Email Address</label>
+                              <div className="relative">
+                                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#98a2b3]" />
+                                  <input
+                                      type="email"
+                                      value={email}
+                                      onChange={(e) => setEmail(e.target.value)}
+                                      placeholder="developer@nexora.app"
+                                      required
+                                      autoFocus
+                                      className="bauhaus-input w-full pl-10 text-sm font-medium border-[#eaecf0]"
+                                  />
+                              </div>
+                            </div>
                             <button
                                 type="submit"
-                                className="w-full bg-white hover:bg-zinc-100 text-black font-semibold py-3 rounded-lg text-sm transition-all active:scale-[0.99]"
+                                className="w-full bauhaus-button py-3 justify-center text-sm"
                             >
-                                Continue with Email
+                                Continue with Email <ArrowLeft className="w-4 h-4 rotate-180" />
                             </button>
                         </form>
                     ) : (
                         /* Password step */
-                        <form onSubmit={handleSubmit} className="space-y-2">
-                            <div
-                                className="flex items-center gap-2 text-zinc-400 text-sm cursor-pointer hover:text-white transition-colors mb-1"
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <button
+                                type="button"
+                                className="flex items-center gap-2 text-[#667085] hover:text-[#101828] font-bold text-[10px] uppercase tracking-widest mb-4 transition-colors p-1"
                                 onClick={() => setStep('email')}
                             >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                                </svg>
-                                {email}
+                                <ArrowLeft className="w-3 h-3" /> {email}
+                            </button>
+                            <div className="space-y-2">
+                              <label className="text-[10px] font-bold text-[#98a2b3] uppercase tracking-[0.2em] ml-1">Password</label>
+                              <div className="relative">
+                                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#98a2b3]" />
+                                  <input
+                                      type="password"
+                                      value={password}
+                                      onChange={(e) => setPassword(e.target.value)}
+                                      placeholder="••••••••"
+                                      required
+                                      autoFocus
+                                      minLength={6}
+                                      className="bauhaus-input w-full pl-10 text-sm font-medium border-[#eaecf0]"
+                                  />
+                              </div>
                             </div>
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Password"
-                                required
-                                autoFocus
-                                minLength={6}
-                                className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-                            />
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full bg-white hover:bg-zinc-100 text-black font-semibold py-3 rounded-lg text-sm transition-all active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full bauhaus-button py-3 justify-center text-sm"
                             >
-                                {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-                                {loading ? 'Signing in...' : 'Continue'}
+                                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Authenticate Domain Access'}
                             </button>
                         </form>
                     )}
 
-                    {/* Divider */}
-                    <div className="flex items-center gap-3 py-1">
-                        <div className="flex-1 h-px bg-zinc-800" />
-                        <div className="flex-1 h-px bg-zinc-800" />
+                    <div className="relative my-8">
+                        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-[#eaecf0]"></div></div>
+                        <div className="relative flex justify-center text-xs uppercase font-bold tracking-widest"><span className="px-3 bg-white text-[#98a2b3]">or connect grid</span></div>
                     </div>
 
-                    {/* Social buttons */}
-                    <div className="space-y-2">
-                        <SocialButton icon={<GoogleIcon />} label="Continue with Google" />
-                        <SocialButton icon={<GithubIcon />} label="Continue with GitHub" />
-                        <SocialButton icon={<AppleIcon />} label="Continue with Apple" />
-                        <SocialButton icon={<SamlIcon />} label="Continue with SAML SSO" />
-                        <SocialButton icon={<PasskeyIcon />} label="Continue with Passkey" />
+                    <div className="grid grid-cols-2 gap-4">
+                        <button className="flex items-center justify-center gap-3 py-2.5 border border-[#eaecf0] hover:bg-[#f9fafb] hover:border-blue-600 transition-all font-bold text-[11px] uppercase tracking-wider text-[#101828]">
+                          <GoogleIcon /> Google
+                        </button>
+                        <button className="flex items-center justify-center gap-3 py-2.5 border border-[#eaecf0] hover:bg-[#f9fafb] hover:border-blue-600 transition-all font-bold text-[11px] uppercase tracking-wider text-[#101828]">
+                          <Github className="w-4 h-4" /> GitHub
+                        </button>
                     </div>
-
-                    {/* Show other options */}
-                    <button
-                        type="button"
-                        onClick={() => setShowOther((v) => !v)}
-                        className="w-full text-sm text-zinc-500 hover:text-white transition-colors text-center py-1"
-                    >
-                        {showOther ? 'Hide other options' : 'Show other options'}
-                    </button>
-
-                    {/* Expanded: GitLab + Bitbucket */}
-                    <div
-                        className={`overflow-hidden transition-all duration-300 ${showOther ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'
-                            }`}
-                    >
-                        <div className="flex gap-2 pt-1">
-                            <IconButton icon={<GitLabIcon />} />
-                            <IconButton icon={<BitbucketIcon />} />
-                        </div>
-                    </div>
-
-                    {/* Sign-up link */}
-                    <p className="text-center text-xs text-zinc-600 pt-2">
-                        Don&apos;t have an account?{' '}
-                        <Link href="/register" className="text-zinc-400 hover:text-white transition-colors">
-                            Sign up
-                        </Link>
-                    </p>
                 </div>
+
+                <div className="text-center pt-2">
+                  <p className="text-xs font-medium text-[#667085]">
+                      New Grid Recruit?{' '}
+                      <Link href="/register" className="text-blue-600 font-bold hover:underline">
+                          Create Account
+                      </Link>
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-center gap-10 pt-8 opacity-20">
+                    <Shield className="w-6 h-6" />
+                    <Globe className="w-6 h-6" />
+                    <Lock className="w-6 h-6" />
+                </div>
+            </div>
+            
+            <div className="fixed bottom-6 right-6">
+                <ThemeToggle />
             </div>
         </main>
     );

@@ -37,16 +37,24 @@ export const LogConsole: React.FC<LogConsoleProps> = ({ deploymentId, projectNam
             term = new Terminal({
                 cursorBlink: true,
                 theme: {
-                    background: '#0f172a',
-                    foreground: '#cbd5e1',
-                    cursor: '#6366f1',
-                    selectionBackground: '#6366f1',
+                    background: '#000000',
+                    foreground: '#ffffff',
+                    cursor: '#FFD60A',
+                    selectionBackground: '#8338EC',
+                    black: '#000000',
+                    red: '#FF006E',
+                    green: '#3A86FF',
+                    yellow: '#FFD60A',
+                    blue: '#3A86FF',
+                    magenta: '#8338EC',
+                    cyan: '#3A86FF',
+                    white: '#ffffff',
                 },
-                fontSize: 13,
-                fontFamily: '"JetBrains Mono", "Fira Code", Menlo, monospace',
+                fontSize: 14,
+                fontFamily: '"JetBrains Mono", monospace',
                 letterSpacing: 0,
-                lineHeight: 1.5,
-                scrollback: 5000,
+                lineHeight: 1.4,
+                scrollback: 10000,
             });
 
             const fitAddon = new FitAddon();
@@ -129,26 +137,28 @@ export const LogConsole: React.FC<LogConsoleProps> = ({ deploymentId, projectNam
     }, [deploymentId]);
 
     return (
-        <div className="flex flex-col h-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
-            <div className="bg-slate-800 px-6 py-3 flex items-center justify-between border-b border-slate-700/50 shrink-0">
-                <div className="flex items-center gap-3">
-                    <div className="flex gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-rose-500/70" />
-                        <div className="w-3 h-3 rounded-full bg-amber-500/70" />
-                        <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
+        <div className="flex flex-col h-full bg-black brutalist-card shadow-[6px_6px_0px_0px_#000] overflow-hidden">
+            <div className="bg-[#8338EC] px-6 py-4 flex items-center justify-between border-b-2 border-black shrink-0">
+                <div className="flex items-center gap-4">
+                    <div className="flex gap-2">
+                        <div className="w-3.5 h-3.5 border-2 border-black bg-[#FF006E]" />
+                        <div className="w-3.5 h-3.5 border-2 border-black bg-[#FFD60A]" />
+                        <div className="w-3.5 h-3.5 border-2 border-black bg-[#3A86FF]" />
                     </div>
-                    <span className="text-xs font-mono text-slate-400">
-                        {projectName ? `nexora://${projectName.toLowerCase().replace(/\s+/g, '-')}` : 'nexora://idle'}
+                    <span className="text-[10px] font-black font-mono text-white tracking-widest uppercase">
+                        {projectName ? `NEXORA://${projectName.toUpperCase().replace(/\s+/g, '-')}` : 'NEXORA://IDLE'}
                     </span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     {deploymentId && (
-                        <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold uppercase tracking-widest">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            Live
-                        </span>
+                        <div className="bg-white border-2 border-black px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]">
+                             <span className="flex items-center gap-1.5 text-[9px] text-black font-black uppercase tracking-tighter">
+                                <span className="inline-block w-2 h-2 border border-black bg-[#FF006E] animate-pulse" />
+                                LIVE_STREAM
+                            </span>
+                        </div>
                     )}
-                    <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Pipeline Logs</span>
+                    <span className="text-[10px] uppercase font-black tracking-widest text-white italic">PIPELINE_OUTPUT</span>
                 </div>
             </div>
             <div ref={terminalRef} className="flex-1 overflow-hidden" style={{ minHeight: 0 }} />
